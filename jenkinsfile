@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    stages {
+        stage('checkout') {
+            steps{
+                echo 'getting Source Code'
+            }
+        }
+        stage('Compile'){
+            steps{
+                sh 'javac src/Student.java'
+            }
+        }
+        stage('Run Application'){
+            steps{
+                sh 'java -cp src Student'
+            }
+        }
+    }
+    post {
+        success{
+            echo 'Pipeline Executed Successfully'
+        }
+        failure {
+            echo 'Pipeline Failed'
+        }
+    }
+}
